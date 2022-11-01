@@ -11,8 +11,8 @@ class FormatTime
     'second' => '%S'
   }.freeze
 
-  def initialize(format)
-    @format = format
+  def initialize(format:)
+    @format = format.split(',')
   end
 
   def time
