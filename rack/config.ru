@@ -3,12 +3,9 @@
 require 'rack'
 require_relative 'app'
 
-app = Rack::Builder.new do
-  map '/time' do
-    run App.new
-  end
+ROUTES = {
+  '/time' => App.new
+}.freeze
 
-  run ->(env) { [404, {}, []] }
-end
-
-run app
+use Rack::ContentType, 'text/plain'
+run Rack::URLMap.new(ROUTES)
