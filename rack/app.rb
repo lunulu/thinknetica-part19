@@ -6,12 +6,12 @@ require_relative 'format_time'
 class App
   def call(env)
     req = Rack::Request.new(env)
-    @formatter = FormatTime.new(format: req.params['format'])
+    formatter = FormatTime.new(format: req.params['format'])
 
-    if @formatter.valid?
-      [200, {}, @formatter.time]
+    if formatter.valid?
+      [200, {}, formatter.time]
     else
-      [400, {}, @formatter.invalid_format]
+      [400, {}, formatter.invalid_format]
     end
   end
 end
